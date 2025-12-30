@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Comparador de Jogos</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, sans-serif;
+        min-height: 100vh;
+        margin: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .container {
+        background: #ffffff;
+        padding: 30px;
+        border-radius: 15px;
+        width: 100%;
+        max-width: 750px;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #333;
+    }
+
+    label {
+        font-weight: 600;
+        color: #555;
+    }
+
+    input, textarea {
+        width: 100%;
+        margin-top: 8px;
+        margin-bottom: 20px;
+        padding: 12px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        font-size: 15px;
+        transition: 0.3s;
+    }
+
+    input:focus, textarea:focus {
+        outline: none;
+        border-color: #c33764;
+        box-shadow: 0 0 5px rgba(195,55,100,0.5);
+    }
+
+    button {
+        width: 100%;
+        padding: 14px;
+        font-size: 16px;
+        font-weight: bold;
+        color: #fff;
+        background: linear-gradient(135deg, #c33764, #1d2671);
+        border: none;
+        border-radius: 12px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        transform: scale(1.03);
+        opacity: 0.9;
+    }
+
+    .resultados {
+        margin-top: 30px;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+        padding: 12px 15px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        background: #f4f4f4;
+        font-weight: 500;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .acertos {
+        padding: 5px 12px;
+        border-radius: 20px;
+        color: #fff;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    .a1 { background: #777; }
+    .a2 { background: #5bc0de; }
+    .a3 { background: #f0ad4e; }
+    .a4 { background: #5cb85c; }
+    .a5 { background: #0275d8; }
+    .a6 { background: #d9534f; }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Comparador de Jogos</h1>
+
+    <label>Jogo Principal (6 números separados por vírgula):</label>
+    <input 
+        type="text" 
+        id="jogoPrincipal"
+        placeholder="Ex: 5,12,23,34,45,60"
+    >
+
+    <label>Seus Jogos (separe combinações por ponto e vírgula):</label>
+    <textarea 
+        id="jogos"
+        rows="5"
+        placeholder="Ex: 1,2,3,4,5,6; 5,12,23,30,40,60"
+    ></textarea>
+
+    <button onclick="compararJogos()">Comparar Jogos</button>
+
+    <div class="resultados">
+        <h2>📊 Resultados</h2>
+        <ul id="resultado"></ul>
+    </div>
+</div>
+
+<script>
+function compararJogos() {
+    const principal = document
+        .getElementById("jogoPrincipal")
+        .value
+        .split(",")
+        .map(n => n.trim());
+
+    const jogosTexto = document.getElementById("jogos").value;
+    const jogos = jogosTexto.split(";");
+
+    const listaResultado = document.getElementById("resultado");
+    listaResultado.innerHTML = "";
+
+    jogos.forEach(jogo => {
+        const numeros = jogo
+            .split(",")
+            .map(n => n.trim())
+            .filter(n => n !== "");
+
+        if (numeros.length === 0) return;
+
+        let acertos = 0;
+        numeros.forEach(num => {
+            if (principal.includes(num)) acertos++;
+        });
+
+        const li = document.createElement("li");
+        li.innerHTML = `
+            <span>${numeros.join(", ")}</span>
+            <span class="acertos a${acertos}">
+                ${acertos} acerto${acertos !== 1 ? "s" : ""}
+            </span>
+        `;
+        listaResultado.appendChild(li);
+    });
+}
+</script>
+
+</body>
+</html>
