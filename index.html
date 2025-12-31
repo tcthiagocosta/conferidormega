@@ -2,6 +2,8 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Comparador de Jogos</title>
 
 <style>
@@ -13,24 +15,30 @@
         font-family: 'Segoe UI', Tahoma, sans-serif;
         min-height: 100vh;
         margin: 0;
+        padding: 15px;
         display: flex;
         align-items: center;
         justify-content: center;
+        background: #f2f2f2;
     }
 
     .container {
         background: #ffffff;
-        padding: 30px;
+        padding: 20px;
         border-radius: 15px;
         width: 100%;
         max-width: 750px;
-        box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
     }
 
     h1 {
         text-align: center;
         margin-bottom: 25px;
         color: #333;
+    }
+
+    h2 {
+        color: #444;
     }
 
     label {
@@ -91,6 +99,23 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .numero {
+        padding: 4px 8px;
+        border-radius: 6px;
+        margin: 2px;
+        display: inline-block;
+        font-size: 14px;
+        background: #ddd;
+    }
+
+    .igual {
+        background: #5cb85c;
+        color: #fff;
+        font-weight: bold;
     }
 
     .acertos {
@@ -107,35 +132,45 @@
     .a4 { background: #5cb85c; }
     .a5 { background: #0275d8; }
     .a6 { background: #d9534f; }
-	
-	.numero {
-    padding: 3px 7px;
-    border-radius: 6px;
-    margin-right: 4px;
-    display: inline-block;
-}
 
-.igual {
-    background: #5cb85c;
-    color: #fff;
-    font-weight: bold;
-}
+    @media (max-width: 600px) {
+        h1 {
+            font-size: 22px;
+        }
 
+        h2 {
+            font-size: 18px;
+        }
+
+        button {
+            font-size: 15px;
+            padding: 12px;
+        }
+
+        .acertos {
+            font-size: 13px;
+            padding: 4px 10px;
+        }
+
+        input, textarea {
+            font-size: 14px;
+        }
+    }
 </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>Comparador de Jogos</h1>
+    <h1>🎯 Comparador de Jogos</h1>
 
-    <label>Jogo Principal (6 números separados por vírgula):</label>
+    <label>Jogo Principal (6 números separados por vírgula)</label>
     <input 
         type="text" 
         id="jogoPrincipal"
         placeholder="Ex: 5,12,23,34,45,60"
     >
 
-    <label>Seus Jogos (separe combinações por ponto e vírgula):</label>
+    <label>Seus Jogos (separe por ponto e vírgula)</label>
     <textarea 
         id="jogos"
         rows="5"
@@ -196,7 +231,6 @@ function compararJogos() {
     });
 }
 </script>
-
 
 </body>
 </html>
