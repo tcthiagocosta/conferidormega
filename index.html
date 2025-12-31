@@ -107,6 +107,19 @@
     .a4 { background: #5cb85c; }
     .a5 { background: #0275d8; }
     .a6 { background: #d9534f; }
+	
+	.numero {
+    padding: 3px 7px;
+    border-radius: 6px;
+    margin-right: 4px;
+    display: inline-block;
+}
+
+.igual {
+    background: #5cb85c;
+    color: #fff;
+    font-weight: bold;
+}
 
 </style>
 </head>
@@ -160,21 +173,30 @@ function compararJogos() {
         if (numeros.length === 0) return;
 
         let acertos = 0;
+        let numerosHTML = "";
+
         numeros.forEach(num => {
-            if (principal.includes(num)) acertos++;
+            if (principal.includes(num)) {
+                acertos++;
+                numerosHTML += `<span class="numero igual">${num}</span>`;
+            } else {
+                numerosHTML += `<span class="numero">${num}</span>`;
+            }
         });
 
         const li = document.createElement("li");
         li.innerHTML = `
-            <span>${numeros.join(", ")}</span>
+            <span>${numerosHTML}</span>
             <span class="acertos a${acertos}">
                 ${acertos} acerto${acertos !== 1 ? "s" : ""}
             </span>
         `;
+
         listaResultado.appendChild(li);
     });
 }
 </script>
+
 
 </body>
 </html>
